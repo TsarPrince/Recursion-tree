@@ -4,6 +4,10 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 const angle = Math.PI / 4;
 
+ctx.font = '22px sans-serif';
+ctx.fillStyle = 'green';
+ctx.fillText('Write an alphabet with mouse pressed!', 10, 30);
+
 const draw = (len, angle, multiplier) => {
   if (len < 1) return;
   ctx.beginPath();
@@ -22,9 +26,15 @@ const draw = (len, angle, multiplier) => {
 // ctx.translate(innerWidth/2, innerHeight);
 // draw(256, angle);
 
+let firstTime = true;
+
 const prev = {x: undefined, y: undefined};
 window.addEventListener('mousemove', (e) => {
   if (e.buttons) {
+    if (firstTime) {
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      firstTime = false;
+    }
     ctx.resetTransform();
     ctx.beginPath();
     ctx.moveTo(prev.x, prev.y);
